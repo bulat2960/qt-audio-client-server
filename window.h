@@ -7,12 +7,15 @@
 #include <QDir>
 #include <QUrl>
 #include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QTextEdit>
+#include <QListWidget>
 
 class Window : public QWidget
 {
     Q_OBJECT
 private:
-    QHBoxLayout* layout;
+    QVBoxLayout* layout;
     QString filename;
 public:
     explicit Window(QString filename, QWidget *parent = nullptr);

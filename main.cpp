@@ -15,8 +15,5 @@ int main(int argc, char *argv[])
 
     window->show();
 
-    QObject::connect(window, &Window::buttonDownloadClicked, socket, &Socket::readFile);
-    QObject::connect(window, &Window::buttonPlayClicked, window, &Window::play);
-
     return a.exec();
 }

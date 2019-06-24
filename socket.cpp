@@ -11,9 +11,9 @@ Socket::Socket(quint16 port, QString filename)
     }
 }
 
-void Socket::readFile()
+void Socket::readFile(QByteArray filename)
 {
-    this->write("Download");
+    this->write(filename);
     this->waitForBytesWritten();
 
     while (this->waitForReadyRead(300) && this->bytesAvailable() > 0)

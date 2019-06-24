@@ -12,7 +12,7 @@ private:
 public:
     Socket(quint16 port, QString filename);
 public slots:
-    void readFile();
+    void readFile(QByteArray filename);
 };
 
 #endif // SOCKET_H

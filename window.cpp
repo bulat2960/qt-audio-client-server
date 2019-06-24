@@ -6,10 +6,17 @@ Window::Window(QString filename, QWidget *parent) : QWidget(parent)
 
     QPushButton* downloadButton = new QPushButton("Download");
     QPushButton* playButton = new QPushButton("Play");
+    QTextEdit* textEdit = new QTextEdit;
+    QListWidget* listWidget = new QListWidget;
 
-    layout = new QHBoxLayout(this);
-    layout->addWidget(downloadButton);
-    layout->addWidget(playButton);
+    QHBoxLayout* controllers = new QHBoxLayout;
+    controllers->addWidget(downloadButton);
+    controllers->addWidget(playButton);
+    controllers->addWidget(textEdit);
+
+    layout = new QVBoxLayout(this);
+    layout->addLayout(controllers);
+    layout->addWidget(listWidget);
 
     connect(downloadButton, &QPushButton::clicked, this, &Window::buttonDownloadClicked);
     connect(playButton, &QPushButton::clicked, this, &Window::buttonPlayClicked);
