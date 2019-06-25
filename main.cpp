@@ -8,10 +8,10 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    QString filename = "D:/2.wav";
+    Window* window = new Window();
+    Socket* socket = new Socket("localhost", 1234);
 
-    Window* window = new Window(filename);
-    Socket* socket = new Socket(1234, filename);
+    QObject::connect(window, &Window::sendNameToSocket, socket, &Socket::sendRequest);
 
     window->show();
 

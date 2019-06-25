@@ -7,12 +7,13 @@
 class Socket : public QTcpSocket
 {
 private:
+    QByteArray filename;
     QByteArray audioFile;
-    QString filename;
 public:
-    Socket(quint16 port, QString filename);
+    Socket(QString hostName, quint16 port);
 public slots:
-    void readFile(QByteArray filename);
+    void sendRequest(QString filename);
+    void readData();
 };
 
 #endif // SOCKET_H

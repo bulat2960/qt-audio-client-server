@@ -15,16 +15,19 @@ class Window : public QWidget
 {
     Q_OBJECT
 private:
-    QVBoxLayout* layout;
-    QString filename;
+    QListWidget* listWidget;
+    QTextEdit* textEdit;
+
+    QVector<QString> filenames;
 public:
-    explicit Window(QString filename, QWidget *parent = nullptr);
+    explicit Window(QWidget *parent = nullptr);
 
 signals:
     void buttonDownloadClicked();
-    void buttonPlayClicked();
+    void sendNameToSocket(QString name);
 public slots:
     void play();
+    void getNameFromTextEdit();
 };
 
 #endif // WINDOW_H

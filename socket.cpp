@@ -1,28 +1,28 @@
 ﻿#include "socket.h"
 
-Socket::Socket(quint16 port, QString filename)
+Socket::Socket(QString hostName, quint16 port)
 {
-    this->filename = filename;
-
-    this->connectToHost("localhost", port);
-    if (this->waitForConnected())
-    {
-        qDebug() << this->state();
-    }
+    this->connectToHost(hostName, port);
+    connect(this, &Socket::readyRead, this, &Socket::readData);
 }
 
-void Socket::readFile(QByteArray filename)
+void Socket::sendRequest(QString filename)
 {
-    this->write(filename);
+    QByteArray name;
+    name.append(filename);
+    this->filename = name;
+    this->write(name);
     this->waitForBytesWritten();
+}
 
+void Socket::readData()
+{
     while (this->waitForReadyRead(300) && this->bytesAvailable() > 0)
     {
-        qDebug() << this->bytesAvailable();
         audioFile.append(this->readAll());
     }
 
-    QFile file(filename);
+    QFile file("D:/DevQt/LizaAudioTransfer/AudioTransferClient/audio/" + filename);
     if (file.open(QIODevice::WriteOnly))
     {
         file.write(audioFile);

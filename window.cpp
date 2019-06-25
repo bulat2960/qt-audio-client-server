@@ -1,31 +1,41 @@
 ﻿#include "window.h"
 
-Window::Window(QString filename, QWidget *parent) : QWidget(parent)
+Window::Window(QWidget *parent) : QWidget(parent)
 {
-    this->filename = filename;
+    textEdit = new QTextEdit;
+    listWidget = new QListWidget;
 
     QPushButton* downloadButton = new QPushButton("Download");
     QPushButton* playButton = new QPushButton("Play");
-    QTextEdit* textEdit = new QTextEdit;
-    QListWidget* listWidget = new QListWidget;
 
     QHBoxLayout* controllers = new QHBoxLayout;
     controllers->addWidget(downloadButton);
     controllers->addWidget(playButton);
     controllers->addWidget(textEdit);
 
-    layout = new QVBoxLayout(this);
+    QVBoxLayout* layout = new QVBoxLayout(this);
     layout->addLayout(controllers);
     layout->addWidget(listWidget);
 
-    connect(downloadButton, &QPushButton::clicked, this, &Window::buttonDownloadClicked);
-    connect(playButton, &QPushButton::clicked, this, &Window::buttonPlayClicked);
+    connect(downloadButton, &QPushButton::clicked, this, &Window::getNameFromTextEdit);
+    connect(playButton, &QPushButton::clicked, this, &Window::play);
 }
 
 void Window::play()
 {
     QMediaPlayer *player = new QMediaPlayer(this);
-    player->setMedia(QUrl::fromLocalFile(filename));
+    QString s = listWidget->item(listWidget->currentRow())->text();
+
+    QString audioPath = "D:/DevQt/LizaAudioTransfer/AudioTransferClient/audio/";
+
+    player->setMedia(QUrl::fromLocalFile(audioPath + s));
     player->setVolume(50);
     player->play();
+}
+
+void Window::getNameFromTextEdit()
+{
+    QString text = this->textEdit->toPlainText();
+    listWidget->addItem(text);
+    emit sendNameToSocket(text);
 }
