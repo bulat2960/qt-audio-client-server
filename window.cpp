@@ -47,7 +47,7 @@ void Window::play()
     }
     else
     {
-        qDebug() << "Файл не выбран.";
+        qDebug() << "Файл не выбран";
     }
 }
 
@@ -61,12 +61,13 @@ void Window::getNameFromTextEdit()
     QString text = this->textEdit->toPlainText();
     if (listWidget->findItems(text, Qt::MatchFixedString).empty())
     {
-        qDebug() << "Получено имя" << text << ", посылаем запрос сокету.";
+        qDebug() << "Получено имя" << text;
+        qDebug() << "Посылаем запрос сокету";
         emit sendNameToSocket(text);
     }
     else
     {
-        qDebug() << "Такой аудиофайл уже существует.";
+        qDebug() << "Такой аудиофайл уже существует";
     }
 }
 
@@ -78,7 +79,7 @@ void Window::putToList(QString name)
     }
     else
     {
-        qDebug() << "Название файла добавлено.";
+        qDebug() << "Название файла добавлено";
         listWidget->addItem(name);
     }
 }

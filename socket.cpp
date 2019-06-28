@@ -13,7 +13,7 @@ void Socket::sendRequest(QString filename)
     this->filename = name;
     this->write(name);
     this->waitForBytesWritten();
-    qDebug() << "Запрос на файл" << name << "послан на сервер.";
+    qDebug() << "Запрос на файл" << name << "послан на сервер";
 }
 
 void Socket::read()
@@ -25,7 +25,7 @@ void Socket::read()
         audioFile.append(this->readAll());
     }
 
-    qDebug() << "Получаю файл с сервера размером" << audioFile.size() << "байт.";
+    qDebug() << "Получаю файл с сервера размером" << audioFile.size() << "байт";
 
     if (audioFile.size() > 0)
     {
@@ -35,12 +35,12 @@ void Socket::read()
             file.write(audioFile);
         }
 
-        qDebug() << "Файл загружен, отправляю на окно имя файла:" << filename << ".";
+        qDebug() << "Файл загружен, отправляю на окно имя файла:" << filename;
         emit downloaded(QString(filename));
     }
     else
     {
-        qDebug() << "Файл пуст, отправляю на окно ошибку.";
+        qDebug() << "Файл пуст, отправляю на окно ошибку";
         emit downloaded(QString("Error"));
     }
 }
