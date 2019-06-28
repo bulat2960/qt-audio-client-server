@@ -11,8 +11,6 @@ Window::Window(QWidget *parent) : QWidget(parent)
     QPushButton* playButton = new QPushButton("Play");
     QPushButton* stopButton = new QPushButton("Stop");
 
-    textEdit->setGeometry(stopButton->geometry());
-
     QGridLayout* controllers = new QGridLayout;
     controllers->addWidget(downloadButton, 0, 0);
     controllers->addWidget(playButton, 0, 1);
