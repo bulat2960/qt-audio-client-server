@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
     Socket* socket = new Socket("localhost", 1234);
 
     QObject::connect(window, &Window::sendNameToSocket, socket, &Socket::sendRequest);
+    QObject::connect(socket, &Socket::downloaded, window, &Window::putToList);
 
     window->show();
 

@@ -3,7 +3,7 @@
 Socket::Socket(QString hostName, quint16 port)
 {
     this->connectToHost(hostName, port);
-    connect(this, &Socket::readyRead, this, &Socket::readData);
+    connect(this, &Socket::readyRead, this, &Socket::read);
 }
 
 void Socket::sendRequest(QString filename)
@@ -15,7 +15,7 @@ void Socket::sendRequest(QString filename)
     this->waitForBytesWritten();
 }
 
-void Socket::readData()
+void Socket::read()
 {
     while (this->waitForReadyRead(300) && this->bytesAvailable() > 0)
     {
@@ -27,4 +27,6 @@ void Socket::readData()
     {
         file.write(audioFile);
     }
+
+    emit downloaded(QString(filename));
 }

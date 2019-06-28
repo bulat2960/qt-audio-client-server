@@ -10,6 +10,7 @@
 #include <QVBoxLayout>
 #include <QTextEdit>
 #include <QListWidget>
+#include <QGridLayout>
 
 class Window : public QWidget
 {
@@ -17,6 +18,8 @@ class Window : public QWidget
 private:
     QListWidget* listWidget;
     QTextEdit* textEdit;
+
+    QMediaPlayer* player;
 
     QVector<QString> filenames;
 public:
@@ -27,7 +30,9 @@ signals:
     void sendNameToSocket(QString name);
 public slots:
     void play();
+    void stop();
     void getNameFromTextEdit();
+    void putToList(QString name);
 };
 
 #endif // WINDOW_H
