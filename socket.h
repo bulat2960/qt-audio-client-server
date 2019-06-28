@@ -9,7 +9,6 @@ class Socket : public QTcpSocket
     Q_OBJECT
 private:
     QByteArray filename;
-    QByteArray audioFile;
 public:
     Socket(QString hostName, quint16 port);
 public slots:
