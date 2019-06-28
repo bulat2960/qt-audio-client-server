@@ -59,7 +59,14 @@ void Window::pause()
 void Window::getNameFromTextEdit()
 {
     QString text = this->textEdit->toPlainText();
-    emit sendNameToSocket(text);
+    if (listWidget->findItems(text, Qt::MatchFixedString).empty())
+    {
+        emit sendNameToSocket(text);
+    }
+    else
+    {
+        qDebug() << "Такой аудиофайл уже существует";
+    }
 }
 
 void Window::putToList(QString name)
