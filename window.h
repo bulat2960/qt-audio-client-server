@@ -20,6 +20,7 @@ private:
     QTextEdit* textEdit;
 
     QMediaPlayer* player;
+    QString currentAudio;
 
     QVector<QString> filenames;
 public:
@@ -30,7 +31,7 @@ signals:
     void sendNameToSocket(QString name);
 public slots:
     void play();
-    void stop();
+    void pause();
     void getNameFromTextEdit();
     void putToList(QString name);
 };

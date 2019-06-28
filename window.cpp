@@ -6,6 +6,7 @@ Window::Window(QWidget *parent) : QWidget(parent)
     listWidget = new QListWidget;
 
     player = new QMediaPlayer(this);
+    player->setVolume(50);
 
     QPushButton* downloadButton = new QPushButton("Download");
     QPushButton* playButton = new QPushButton("Play");
@@ -23,26 +24,36 @@ Window::Window(QWidget *parent) : QWidget(parent)
 
     connect(downloadButton, &QPushButton::clicked, this, &Window::getNameFromTextEdit);
     connect(playButton, &QPushButton::clicked, this, &Window::play);
-    connect(stopButton, &QPushButton::clicked, this, &Window::stop);
+    connect(stopButton, &QPushButton::clicked, this, &Window::pause);
 }
 
 void Window::play()
 {
+    QString audioPath = "D:/DevQt/LizaAudioTransfer/AudioTransferClient/audio/";
+
+    QString s;
     if (listWidget->item(listWidget->currentRow()) != nullptr)
     {
-        QString s = listWidget->item(listWidget->currentRow())->text();
+        s = listWidget->item(listWidget->currentRow())->text();
 
-        QString audioPath = "D:/DevQt/LizaAudioTransfer/AudioTransferClient/audio/";
-
-        player->setMedia(QUrl::fromLocalFile(audioPath + s));
-        player->setVolume(50);
+        if (s != currentAudio)
+        {
+            player->stop();
+            player->setMedia(QUrl::fromLocalFile(audioPath + s));
+        }
         player->play();
+
+        currentAudio = s;
+    }
+    else
+    {
+        qDebug() << "Файл не выбран";
     }
 }
 
-void Window::stop()
+void Window::pause()
 {
-    player->stop();
+    player->pause();
 }
 
 void Window::getNameFromTextEdit()
