@@ -2,7 +2,10 @@
 
 Window::Window(QWidget *parent) : QWidget(parent)
 {
-    textEdit = new QTextEdit;
+    serverNameField = new QTextEdit;
+    serverNameField->setMaximumSize(1000, 50);
+    audioNameField = new QTextEdit;
+    audioNameField->setMaximumSize(1000, 50);
     listWidget = new QListWidget;
 
     player = new QMediaPlayer(this);
@@ -11,18 +14,25 @@ Window::Window(QWidget *parent) : QWidget(parent)
     QPushButton* downloadButton = new QPushButton("Download");
     QPushButton* playButton = new QPushButton("Play");
     QPushButton* stopButton = new QPushButton("Stop");
+    QPushButton* connectButton = new QPushButton("Connect");
 
-    QGridLayout* controllers = new QGridLayout;
-    controllers->addWidget(downloadButton, 0, 0);
-    controllers->addWidget(playButton, 0, 1);
-    controllers->addWidget(stopButton, 0, 2);
-    controllers->addWidget(textEdit, 1, 1);
+    QHBoxLayout* buttonsLayout = new QHBoxLayout;
+    buttonsLayout->addWidget(connectButton);
+    buttonsLayout->addWidget(downloadButton);
+    buttonsLayout->addWidget(playButton);
+    buttonsLayout->addWidget(stopButton);
+
+    QHBoxLayout* textLayout = new QHBoxLayout;
+    textLayout->addWidget(serverNameField);
+    textLayout->addWidget(audioNameField);
 
     QVBoxLayout* layout = new QVBoxLayout(this);
-    layout->addLayout(controllers);
+    layout->addLayout(buttonsLayout);
+    layout->addLayout(textLayout);
     layout->addWidget(listWidget);
 
-    connect(downloadButton, &QPushButton::clicked, this, &Window::getNameFromTextEdit);
+    connect(downloadButton, &QPushButton::clicked, this, &Window::getAudioName);
+    connect(connectButton, &QPushButton::clicked, this, &Window::getServerIp);
     connect(playButton, &QPushButton::clicked, this, &Window::play);
     connect(stopButton, &QPushButton::clicked, this, &Window::pause);
 }
@@ -56,18 +66,33 @@ void Window::pause()
     player->pause();
 }
 
-void Window::getNameFromTextEdit()
+void Window::getAudioName()
 {
-    QString text = this->textEdit->toPlainText();
+    QString text = this->audioNameField->toPlainText();
     if (listWidget->findItems(text, Qt::MatchFixedString).empty())
     {
         qDebug() << "Получено имя" << text;
         qDebug() << "Посылаем запрос сокету";
-        emit sendNameToSocket(text);
+        emit sendAudioNameToSocket(text);
     }
     else
     {
         qDebug() << "Такой аудиофайл уже существует";
+    }
+}
+
+void Window::getServerIp()
+{
+    QString text = this->serverNameField->toPlainText();
+    if (text.size() > 0)
+    {
+        qDebug() << "Получено имя сервера" << text;
+        qDebug() << "Посылаем запрос на подключение к серверу";
+        emit sendServerIpToSocket(text);
+    }
+    else
+    {
+        qDebug() << "Поле пусто";
     }
 }
 

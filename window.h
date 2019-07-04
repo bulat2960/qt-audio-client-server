@@ -17,7 +17,8 @@ class Window : public QWidget
     Q_OBJECT
 private:
     QListWidget* listWidget;
-    QTextEdit* textEdit;
+    QTextEdit* audioNameField;
+    QTextEdit* serverNameField;
 
     QMediaPlayer* player;
     QString currentAudio;
@@ -28,11 +29,13 @@ public:
 
 signals:
     void buttonDownloadClicked();
-    void sendNameToSocket(QString name);
+    void sendAudioNameToSocket(QString name);
+    void sendServerIpToSocket(QString name);
 public slots:
     void play();
     void pause();
-    void getNameFromTextEdit();
+    void getAudioName();
+    void getServerIp();
     void putToList(QString name);
 };
 

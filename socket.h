@@ -10,10 +10,11 @@ class Socket : public QTcpSocket
 private:
     QByteArray filename;
 public:
-    Socket(QString hostName, quint16 port);
+    Socket();
 public slots:
     void sendRequest(QString filename);
     void read();
+    void connectToServer(QString serverIp);
 signals:
     void downloaded(QString name);
 };

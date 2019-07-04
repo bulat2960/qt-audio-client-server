@@ -1,9 +1,17 @@
 ﻿#include "socket.h"
 
-Socket::Socket(QString hostName, quint16 port)
+Socket::Socket()
 {
-    this->connectToHost(hostName, port);
     connect(this, &Socket::readyRead, this, &Socket::read);
+}
+
+void Socket::connectToServer(QString serverIp)
+{
+    this->connectToHost(serverIp, 1234);
+    if (this->waitForConnected() == false)
+    {
+        qDebug() << "Подключение по указанному ip не удалось";
+    }
 }
 
 void Socket::sendRequest(QString filename)
