@@ -37,7 +37,7 @@ void Socket::read()
 
     if (audioFile.size() > 0)
     {
-        QFile file("D:/DevQt/LizaAudioTransfer/AudioTransferClient/audio/" + filename);
+        QFile file("C:/Users/Liza/Documents/qt/serv_client/qt-audio-transfer-client-master/audio/" + filename);
         if (file.open(QIODevice::WriteOnly))
         {
             file.write(audioFile);

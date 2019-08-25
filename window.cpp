@@ -39,7 +39,7 @@ Window::Window(QWidget *parent) : QWidget(parent)
 
 void Window::play()
 {
-    QString audioPath = "D:/DevQt/LizaAudioTransfer/AudioTransferClient/audio/";
+    QString audioPath = "C:/Users/Liza/Documents/qt/serv_client/qt-audio-transfer-client-master/audio/";
 
     QString s;
     if (listWidget->item(listWidget->currentRow()) != nullptr)
