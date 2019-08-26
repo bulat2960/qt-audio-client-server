@@ -3,6 +3,7 @@
 
 #include <QTcpSocket>
 #include <QFile>
+#include <QDir>
 
 class Socket : public QTcpSocket
 {
