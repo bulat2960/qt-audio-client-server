@@ -73,7 +73,7 @@ void Window::getAudioName()
     {
         qDebug() << "Получено имя" << text;
         qDebug() << "Посылаем запрос сокету";
-        emit sendAudioNameToSocket(text);
+        emit sendAudioNameToSocket(text + ".wav");
     }
     else
     {
