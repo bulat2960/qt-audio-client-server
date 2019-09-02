@@ -8,15 +8,15 @@ Window::Window(QWidget *parent) : QWidget(parent)
     audioNameField->setMaximumSize(1000, 50);
     listWidget = new QListWidget;
 
-    player = new QMediaPlayer(this);
-    player->setVolume(50);
+    //player = new QMediaPlayer(this);
+    //player->setVolume(50);
 
     QPushButton* downloadButton = new QPushButton("Download");
     QPushButton* playButton = new QPushButton("Play");
     QPushButton* stopButton = new QPushButton("Stop");
     QPushButton* connectButton = new QPushButton("Connect");
 
-    QHBoxLayout* buttonsLayout = new QHBoxLayout;
+    QVBoxLayout* buttonsLayout = new QVBoxLayout;
     buttonsLayout->addWidget(connectButton);
     buttonsLayout->addWidget(downloadButton);
     buttonsLayout->addWidget(playButton);
@@ -39,7 +39,7 @@ Window::Window(QWidget *parent) : QWidget(parent)
 
 void Window::play()
 {
-    QString audioPath = QDir::currentPath() + "/audio/";
+    /*QString audioPath = QDir::currentPath() + "/audio/";
 
     QString s;
     if (listWidget->item(listWidget->currentRow()) != nullptr)
@@ -58,12 +58,12 @@ void Window::play()
     else
     {
         qDebug() << "Файл не выбран";
-    }
+    }*/
 }
 
 void Window::pause()
 {
-    player->pause();
+    //player->pause();
 }
 
 void Window::getAudioName()

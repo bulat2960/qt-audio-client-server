@@ -19,9 +19,14 @@ Socket::Socket()
 
 void Socket::connectToServer(QString serverIp)
 {
-    this->connectToHost(serverIp, 1234);
-    if (this->waitForConnected() == false)
+    this->connectToHost(serverIp, 8000);
+    if (this->waitForConnected(3000) == false)
     {
+        QFile file("temp.txt");
+        if (file.open(QIODevice::WriteOnly))
+        {
+            qDebug() << "Ошибка:" << errorString();
+        }
         qDebug() << "Подключение по указанному ip не удалось";
     }
     else

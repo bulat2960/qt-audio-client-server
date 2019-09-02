@@ -1,5 +1,5 @@
 ﻿#include <QApplication>
-#include <QMediaPlaylist>
+//#include <QMediaPlaylist>
 
 #include "window.h"
 #include "socket.h"

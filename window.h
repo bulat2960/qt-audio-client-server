@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QPushButton>
-#include <QMediaPlayer>
+//#include <QMediaPlayer>
 #include <QDir>
 #include <QUrl>
 #include <QHBoxLayout>
@@ -11,6 +11,7 @@
 #include <QTextEdit>
 #include <QListWidget>
 #include <QGridLayout>
+#include <QDebug>
 
 class Window : public QWidget
 {
@@ -20,7 +21,7 @@ private:
     QTextEdit* audioNameField;
     QTextEdit* serverNameField;
 
-    QMediaPlayer* player;
+    //QMediaPlayer* player;
     QString currentAudio;
 
     QVector<QString> filenames;
