@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QPushButton>
-//#include <QMediaPlayer>
+#include <QMediaPlayer>
 #include <QDir>
 #include <QUrl>
 #include <QHBoxLayout>
@@ -21,7 +21,7 @@ private:
     QTextEdit* audioNameField;
     QTextEdit* serverNameField;
 
-    //QMediaPlayer* player;
+    QMediaPlayer* player;
     QString currentAudio;
 
     QVector<QString> filenames;
